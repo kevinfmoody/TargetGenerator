@@ -20,7 +20,7 @@ namespace TargetGenerator
         public double latitude { get; set; }
         public double longitude { get; set; }
 
-        public Position(double latitude, double longitude)
+        public Position(double latitude = 0, double longitude = 0)
         {
             this.latitude = latitude;
             this.longitude = longitude;

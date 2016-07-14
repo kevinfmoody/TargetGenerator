@@ -71,5 +71,21 @@ namespace TargetGenerator
             ac.engagePathMode(this);
             return ac;
         }
+
+        public override string ToString()
+        {
+            string str = "";
+            int i = 0;
+            foreach (Waypoint waypoint in this.waypoints)
+            {
+                if (this.activeWaypoint == i)
+                {
+                    str += "<ACTIVE> ";
+                }
+                str += waypoint.ToString() + "\n";
+                i++;
+            }
+            return str;
+        }
     }
 }

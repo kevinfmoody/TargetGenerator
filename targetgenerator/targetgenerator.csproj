@@ -56,6 +56,9 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="Airport.cs" />
     <Compile Include="Airspace.cs" />
+    <Compile Include="ArrivalFileReader.cs" />
+    <Compile Include="ArrivalProcedure.cs" />
+    <Compile Include="ArrivalProcedureStore.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Data.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="LinearControl.cs" />
     <Compile Include="MagVar.cs" />
     <Compile Include="Path.cs" />
+    <Compile Include="PathBuilder.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

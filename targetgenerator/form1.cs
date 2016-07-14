@@ -19,6 +19,25 @@ namespace TargetGenerator
         public Form1()
         {
             InitializeComponent();
+
+            var reader = new ArrivalFileReader();
+            try
+            {
+                reader.readFile();
+
+                ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedures["OOSHN4"];
+                Path path = procedure.path("FEXXX", "33L");
+                Console.Write(path.ToString());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid Arrival Procedure File Format");
+            }
+            
+
+           
+            return;
+
             ClientProperties props = new ClientProperties("TRATG", new Version(0, 1), 0xC768, FSDSession.FlipEndian("1d8c14be2b5bce1fb9a09a1ba4cfb0a1"));
             Airport kbos = new Airport("KBOS");
 
