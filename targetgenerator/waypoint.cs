@@ -91,6 +91,7 @@ namespace TargetGenerator
             {
                 str += " (THEN HDG " + this.course + ")";
             }
+            str += " [" + this.position.latitude + ", " + this.position.longitude + "]";
             return str;
         }
     }

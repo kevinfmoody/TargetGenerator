@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,23 +21,33 @@ namespace TargetGenerator
         {
             InitializeComponent();
 
+            Airspace airspace = Airspace.Instance;
+            airspace.loadFixes(Data.FixesFile);
+
+
             var reader = new ArrivalFileReader();
             try
             {
                 reader.readFile();
 
-                ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedures["OOSHN4"];
-                Path path = procedure.path("FEXXX", "33L");
+                ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedure("ROBUC2");
+                Path path = procedure.path("22L");
                 Console.Write(path.ToString());
             }
             catch (Exception)
             {
                 Console.WriteLine("Invalid Arrival Procedure File Format");
             }
-            
 
-           
-            return;
+            Console.WriteLine("~~~~~~~~~~~");
+
+            String line;
+            System.IO.StreamReader file = new System.IO.StreamReader(Data.RoutesFile);
+            while ((line = file.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+                RouteParser.Parse(new Airport(line.Substring(0, 4)), new Airport(line.Substring(5, 4)), line);
+            }
 
             ClientProperties props = new ClientProperties("TRATG", new Version(0, 1), 0xC768, FSDSession.FlipEndian("1d8c14be2b5bce1fb9a09a1ba4cfb0a1"));
             Airport kbos = new Airport("KBOS");
@@ -62,9 +73,15 @@ namespace TargetGenerator
             Runway rwy22r = new Runway("22R", rwy22rpos, rwy22rpos.courseTo(rwy4lpos), 15.2, false);
             kbos.runways.Add(rwy22r.identifier, rwy22r);
 
-            Airspace airspace = new Airspace();
             airspace.airports.Add(kbos.identifier, kbos);
             airspace.streams.Add("QUABN", Data.QUABN3());
+
+            Console.WriteLine("Loading fixes...");
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            
+            stopwatch.Stop();
+            Console.WriteLine("Fixes loaded in " + stopwatch.ElapsedMilliseconds + "ms!");
 
             WeatherSituation weather = new WeatherSituation();
 

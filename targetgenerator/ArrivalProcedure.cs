@@ -60,6 +60,10 @@ namespace TargetGenerator
         public Path path(string enrouteTransition = "", string terminalTransition = "")
         {
             Path path = new Path();
+            if (enrouteTransition.Length != 0 && terminalTransition.Length == 0)
+            {
+                terminalTransition = enrouteTransition;
+            }
             addEnroutePathSegment(path, enrouteTransition);
             addTerminalPathSegment(path, terminalTransition);
             return path;

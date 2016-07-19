@@ -30,7 +30,8 @@ namespace TargetGenerator
             string line;
             ArrivalProcedure.SegmentType segmentType = ArrivalProcedure.SegmentType.EnrouteTransition;
             List<string> activeTransitions = new List<string>();
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\Kevin Moody\Documents\visual studio 2015\projects\targetgenerator\targetgenerator\bin\debug\stars.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(Data.ArrivalsFile);
+            Airspace airspace = Airspace.Instance;
             while ((line = file.ReadLine()) != null)
             {
                 string[] tokens = line.Trim().Split(new char[] { ' ' });
@@ -99,7 +100,11 @@ namespace TargetGenerator
                                     break;
                                 }
                             }
-                            Waypoint waypoint = new Waypoint(fixOrCourse, new Position());
+                            if (!airspace.waypoints.ContainsKey(fixOrCourse))
+                            {
+                                break;
+                            }
+                            Waypoint waypoint = new Waypoint(fixOrCourse, airspace.waypoints[fixOrCourse]);
                             for (int i = 1; i < tokens.Length; i++)
                             {
                                 string token = tokens[i];

@@ -9,6 +9,9 @@ namespace TargetGenerator
 {
     class Situation
     {
+        private readonly int RepeatGroupDescription = 1 << 0;
+        private readonly int RepeatGroupCount = 1 << 1;
+
         ClientProperties properties;
 
         public Dictionary<string, SweatboxSession> sessions { get; set; }
@@ -30,6 +33,67 @@ namespace TargetGenerator
             this.weather = weather;
 
             this.paused = false;
+        }
+
+        private int toggleParseState(int states, int state)
+        {
+            return states | state;
+        }
+
+        private bool hasParseState(int states, int state)
+        {
+            return (states & state) != 0;
+        }
+
+        public void loadAircraftFromSituationFile(string filename)
+        {
+            string[] lines = System.IO.File.ReadAllLines(filename);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                string[] parts = line.Split(new char[] { ' ' });
+                if (parts.Length == 0)
+                {
+                    return;
+                }
+                switch (parts[0])
+                {
+                    case "STREAM":
+                        if (parts.Length < 4)
+                        {
+                            return;
+                        }
+                        string airport = parts[1];
+                        string arrival = parts[2];
+                        int parseState = 0;
+                        for (int j = 0; j < parts.Length; j++)
+                        {
+                            string part = parts[j];
+                            for (int k = 0; k < part.Length; k++)
+                            {
+                                switch (part[k])
+                                {
+                                    case '(':
+                                        if (!hasParseState(parseState, RepeatGroupDescription))
+                                        {
+                                            parseState = toggleParseState(parseState, RepeatGroupDescription);
+                                        }
+                                        break;
+                                    case ')':
+                                        break;
+                                    case '[':
+
+                                        break;
+                                    case ']':
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
         public void loadAircraftFromACSimAircraftFile(string filename)

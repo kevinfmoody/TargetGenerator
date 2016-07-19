@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TrueNorth.Geographic;
 
@@ -24,6 +25,22 @@ namespace TargetGenerator
         {
             this.latitude = latitude;
             this.longitude = longitude;
+        }
+
+        public static Position Parse(string str)
+        {
+            Match match = Regex.Match(str, @"(\d+)-(\d+)-(\d+\.\d+)(N|S)\s+(\d+)-(\d+)-(\d+\.\d+)(E|W)");
+            int latDegrees = int.Parse(match.Groups[1].Value);
+            int latMinutes = int.Parse(match.Groups[2].Value);
+            double latSeconds = double.Parse(match.Groups[3].Value);
+            string latDirection = match.Groups[4].Value;
+            int lonDegrees = int.Parse(match.Groups[5].Value);
+            int lonMinutes = int.Parse(match.Groups[6].Value);
+            double lonSeconds = double.Parse(match.Groups[7].Value);
+            string lonDirection = match.Groups[8].Value;
+            double lat = (latDirection == "N" ? 1 : -1) * (latDegrees + latMinutes / 60.0d + latSeconds / 3600.0d);
+            double lon = (lonDirection == "E" ? 1 : -1) * (lonDegrees + lonMinutes / 60.0d + lonSeconds / 3600.0d);
+            return new Position(lat, lon);
         }
 
         public static double AngleBetween(double a, double b)

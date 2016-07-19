@@ -8,6 +8,10 @@ namespace TargetGenerator
 {
     class Data
     {
+        public static readonly string FixesFile = @"C:\Users\Kevin Moody\Documents\visual studio 2015\projects\targetgenerator\targetgenerator\bin\debug\FIX.txt";
+        public static readonly string RoutesFile = @"C:\Users\Kevin Moody\Documents\visual studio 2015\projects\targetgenerator\targetgenerator\bin\debug\routes.txt";
+        public static readonly string ArrivalsFile = @"C:\Users\Kevin Moody\Documents\visual studio 2015\projects\targetgenerator\targetgenerator\bin\debug\stars.txt";
+
         public static string[] aircraft = { "SWA294" };
 
         public static Stream QUABN3()
