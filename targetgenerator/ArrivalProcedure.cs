@@ -21,6 +21,21 @@ namespace TargetGenerator
         public List<Waypoint> enroute { get; set; }
         public List<Waypoint> terminal { get; set; }
         public Dictionary<string, List<Waypoint>> terminalTransitions { get; set; }
+        public Waypoint terminalWaypoint
+        {
+            get
+            {
+                if (this.terminal.Count > 0)
+                {
+                    return this.terminal[0];
+                }
+                else if (this.enroute.Count > 0)
+                {
+                    return this.enroute[this.enroute.Count - 1];
+                }
+                return null;
+            }
+        }
 
         public ArrivalProcedure(string name)
         {
@@ -60,7 +75,7 @@ namespace TargetGenerator
         public Path path(string enrouteTransition = "", string terminalTransition = "")
         {
             Path path = new Path();
-            if (enrouteTransition.Length != 0 && terminalTransition.Length == 0)
+            if (enrouteTransition.Length > 0 && terminalTransition.Length == 0)
             {
                 terminalTransition = enrouteTransition;
             }
@@ -76,9 +91,29 @@ namespace TargetGenerator
             return path;
         }
 
+        public Waypoint finalWaypoint(string terminalTransition = "")
+        {
+
+            if (terminalTransition != "" && this.terminalTransitions.ContainsKey(terminalTransition)
+                && this.terminalTransitions[terminalTransition].Count > 0)
+            {
+                List<Waypoint> transition = this.terminalTransitions[terminalTransition];
+                return transition[transition.Count - 1];
+            }
+            if (this.terminal.Count > 0)
+            {
+                return this.terminal[this.terminal.Count - 1];
+            }
+            else if (this.enroute.Count > 0)
+            {
+                return this.enroute[this.enroute.Count - 1];
+            }
+            return null;
+        }
+
         private void addEnroutePathSegment(Path path, string enrouteTransition = "")
         {
-            if (enrouteTransition.Length != 0 && this.enrouteTransitions.ContainsKey(enrouteTransition))
+            if (enrouteTransition.Length > 0 && this.enrouteTransitions.ContainsKey(enrouteTransition))
             {
                 path.waypoints.AddRange(this.enrouteTransitions[enrouteTransition]);
             }
@@ -88,7 +123,7 @@ namespace TargetGenerator
         private void addTerminalPathSegment(Path path, string terminalTransition = "")
         {
             path.waypoints.AddRange(this.terminal);
-            if (terminalTransition.Length != 0 && this.terminalTransitions.ContainsKey(terminalTransition))
+            if (terminalTransition.Length > 0 && this.terminalTransitions.ContainsKey(terminalTransition))
             {
                 path.waypoints.AddRange(this.terminalTransitions[terminalTransition]);
             }

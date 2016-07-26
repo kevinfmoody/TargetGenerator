@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Radial.cs" />
     <Compile Include="RadialControl.cs" />
+    <Compile Include="Rand.cs" />
     <Compile Include="RouteParser.cs" />
     <Compile Include="Runway.cs" />
     <Compile Include="Situation.cs" />

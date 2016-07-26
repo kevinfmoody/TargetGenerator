@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Metacraft.Vatsim.Network;
 
@@ -9,8 +10,17 @@ namespace TargetGenerator
 {
     class Situation
     {
-        private readonly int RepeatGroupDescription = 1 << 0;
-        private readonly int RepeatGroupCount = 1 << 1;
+        struct AircraftSlot
+        {
+            public string type;
+            public double distance;
+        }
+
+        enum ParseState
+        {
+            Normal,
+            RepeatGroup
+        }
 
         ClientProperties properties;
 
@@ -45,6 +55,147 @@ namespace TargetGenerator
             return (states & state) != 0;
         }
 
+        private void parseAircraftPart(string part, List<AircraftSlot> slots,double distanceOffset)
+        {
+            AircraftSlot slot = new AircraftSlot();
+            string[] aircraftParts = part.Split(new char[] { ':' });
+            double[] sums = new double[aircraftParts.Length];
+            double sum = 0;
+            for (int i = 0; i < aircraftParts.Length; i++)
+            {
+                double ratio = 1;
+                Match match = Regex.Match(aircraftParts[i], @"\d+");
+                if (match.Success)
+                {
+                    ratio = double.Parse(match.Value);
+                }
+                sum += ratio;
+                sums[i] = sum;
+            }
+            double choice = Rand.Instance.getDouble() * sum;
+            for (int i = 0; i < sums.Length; i++)
+            {
+                if (sums[i] <= choice)
+                {
+                    slot.type = Regex.Match(aircraftParts[i], @"^\d").Value;
+                    break;
+                }
+            }
+            slot.distance = distanceOffset;
+            slots.Add(slot);
+        }
+
+        private void parseDistancePart(string part, ref double distanceOffset)
+        {
+            double distance;
+            int minMaxSeperatorIndex = part.IndexOf('-');
+            if (minMaxSeperatorIndex != -1)
+            {
+                double minDistance = double.Parse(part.Substring(0, minMaxSeperatorIndex));
+                double maxDistance = double.Parse(part.Substring(minMaxSeperatorIndex + 1));
+                distance = minDistance + Rand.Instance.getDouble() * (maxDistance - minDistance);
+            }
+            else
+            {
+                distance = double.Parse(part);
+            }
+            distanceOffset += distance;
+        }
+
+        private void parseStreamPart(string part, List<AircraftSlot> slots,
+            ref double distanceOffset)
+        {
+            if (part.Any(char.IsLetter))
+            {
+                this.parseAircraftPart(part, slots, distanceOffset);
+            }
+            else
+            {
+                this.parseDistancePart(part, ref distanceOffset);
+            }
+        }
+
+        private void parseRepeatGroupParts(List<string> parts, int count, List<AircraftSlot> slots,
+            ref double distanceOffset)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                foreach (string part in parts)
+                {
+                    parseStreamPart(part, slots, ref distanceOffset);
+                }
+            }
+        }
+
+        private void parseAircraftSlots(string[] parts, List<AircraftSlot> slots,
+            ref double distanceOffset)
+        {
+            List<string> buffer = new List<string>();
+            ParseState parseState = ParseState.Normal;
+            for (int i = 3; i < parts.Length; i++)
+            {
+                string part = parts[i];
+                switch (parseState)
+                {
+                    case ParseState.Normal:
+                        if (part[0] == '(')
+                        {
+                            parseState = ParseState.RepeatGroup;
+                            buffer.Clear();
+                            buffer.Add(part.Substring(1));
+                        }
+                        else
+                        {
+                            this.parseStreamPart(part, slots, ref distanceOffset);
+                        }
+                        break;
+                    case ParseState.RepeatGroup:
+                        int end = part.IndexOf(')');
+                        if (end != -1)
+                        {
+                            buffer.Add(part.Substring(0, end));
+                            int count = int.Parse(part.Substring(end + 2));
+                            this.parseRepeatGroupParts(buffer, count, slots,
+                                ref distanceOffset);
+                            parseState = ParseState.Normal;
+                        }
+                        else
+                        {
+                            buffer.Add(part);
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void loadAircraftFromStreamParts(string[] parts)
+        {
+            if (parts.Length < 4)
+            {
+                return;
+            }
+            string airport = parts[1];
+            string arrival = parts[2];
+            double distanceOffset = 0;
+            List<AircraftSlot> slots = new List<AircraftSlot>();
+            this.parseAircraftSlots(parts, slots, ref distanceOffset);
+
+            ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedure(arrival);
+            Path path = procedure.path();
+            string terminalWaypoint = procedure.terminalWaypoint.identifier;
+            int i = 1;
+            string callsign = arrival.Substring(0, 3);
+            foreach (AircraftSlot slot in slots)
+            {
+                Console.WriteLine(slot.distance + "NM");
+                Path acPath = path.pathRelativeToWaypoint(terminalWaypoint, slot.distance + 5);
+                Aircraft ac = new Aircraft(this, callsign + i, new Position(), 250, 5000, 240, "B737", "KJFK", "KBOS");
+                ac.snapToPath(acPath);
+                this.addAircraft(ac);
+                i++;
+            }
+        }
+
         public void loadAircraftFromSituationFile(string filename)
         {
             string[] lines = System.IO.File.ReadAllLines(filename);
@@ -59,38 +210,7 @@ namespace TargetGenerator
                 switch (parts[0])
                 {
                     case "STREAM":
-                        if (parts.Length < 4)
-                        {
-                            return;
-                        }
-                        string airport = parts[1];
-                        string arrival = parts[2];
-                        int parseState = 0;
-                        for (int j = 0; j < parts.Length; j++)
-                        {
-                            string part = parts[j];
-                            for (int k = 0; k < part.Length; k++)
-                            {
-                                switch (part[k])
-                                {
-                                    case '(':
-                                        if (!hasParseState(parseState, RepeatGroupDescription))
-                                        {
-                                            parseState = toggleParseState(parseState, RepeatGroupDescription);
-                                        }
-                                        break;
-                                    case ')':
-                                        break;
-                                    case '[':
-
-                                        break;
-                                    case ']':
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
+                        this.loadAircraftFromStreamParts(parts);
                         break;
                 }
             }

@@ -76,11 +76,20 @@ namespace TargetGenerator
             return 0;
         }
 
-        public void updateActivePosition(string identifier, double distance)
+        public Path copy()
+        {
+            Path path = new Path();
+            path.waypoints.AddRange(this.waypoints);
+            path.activeWaypoint = this.activeWaypoint;
+            path.activePosition = this.activePosition;
+            return path;
+        }
+
+        public Path pathRelativeToWaypoint(string identifier, double distance)
         {
             if (this.waypoints.Count < 2)
             {
-                return;
+                return null;
             }
 
             int i = 0;
@@ -93,12 +102,12 @@ namespace TargetGenerator
             }
             if (i >= this.waypoints.Count)
             {
-                return;
+                return null;
             }
-            
+
+            Path path = this.copy();
             double distanceRemaining = distance;
-            while (this.isValidWaypointIndex(i))
-            {
+            while (true) {
                 int nextIndex = i - 1;
                 Waypoint current = this.waypoints[i];
                 if (this.isValidWaypointIndex(nextIndex))
@@ -111,17 +120,19 @@ namespace TargetGenerator
                     }
                     else
                     {
-                        this.activeWaypoint = i;
-                        this.activePosition = current.position.destinationPoint(
+                        path.activeWaypoint = i;
+                        path.activePosition = current.position.destinationPoint(
                             current.position.courseTo(next.position), distanceRemaining);
+                        return path;
                     }
                 }
                 else
                 {
-                    this.activeWaypoint = i;
+                    path.activeWaypoint = i;
                     Waypoint previous = this.waypoints[i + 1];
-                    this.activePosition = current.position.destinationPoint(
+                    path.activePosition = current.position.destinationPoint(
                         previous.position.courseTo(current.position), distanceRemaining);
+                    return path;
                 }
                 i = nextIndex;
             }

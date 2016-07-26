@@ -187,11 +187,17 @@ namespace TargetGenerator
                     }
                     if (this.airspeed.target % 5 == 1)
                     {
-                        this.airspeed.target = this.path.nextAirspeed();
+                        if (this.path.nextAirspeed() != 0)
+                        {
+                            this.airspeed.target = this.path.nextAirspeed();
+                        }
                     }
                     if (this.altitude.target % 100 == 1)
                     {
-                        this.altitude.target = this.path.nextAltitude();
+                        if (this.path.nextAltitude() != 0)
+                        {
+                            this.altitude.target = this.path.nextAltitude();
+                        }
                     }
                 }
                 else
@@ -269,6 +275,14 @@ namespace TargetGenerator
             this.heading.target = heading;
         }
 
+        public void forceHeading(double heading)
+        {
+            this.navMode = NavMode.OFF;
+            this.heading.direction = 0;
+            this.heading.value = heading;
+            this.heading.target = heading;
+        }
+
         public void climbDescendMaintain(double altitude)
         {
             if (this.navMode == NavMode.APPROACH)
@@ -276,6 +290,22 @@ namespace TargetGenerator
                 this.navMode = NavMode.LOCALIZER;
             }
             this.altitude.target = altitude < 1000 ? altitude * 100 : altitude;
+        }
+
+        public void forceAltitude(double altitude)
+        {
+            if (this.navMode == NavMode.APPROACH)
+            {
+                this.navMode = NavMode.LOCALIZER;
+            }
+            this.altitude.value = altitude < 1000 ? altitude * 100 : altitude;
+            this.altitude.target = altitude < 1000 ? altitude * 100 : altitude;
+        }
+
+        public void forceAirspeed(double airspeed)
+        {
+            this.airspeed.value = airspeed;
+            this.airspeed.target = airspeed;
         }
 
         public void engageLocalizerMode(Runway runway)
@@ -308,6 +338,27 @@ namespace TargetGenerator
             this.path = path;
             this.resumeNormalSpeed();
             this.resumeNormalAltitude();
+        }
+
+        public void snapToPath(Path path)
+        {
+            this.path = path;
+            double nextAltitude = path.nextAltitude();
+            double nextAirspeed = path.nextAirspeed();
+            double heading = (path.legCourse() - this.position.magneticDeclination(nextAltitude)
+                + 360) % 360;
+
+            this.position = path.activePosition;
+            this.forceHeading(heading);
+            if (nextAltitude != 0)
+            {
+                this.forceAltitude(nextAltitude);
+            }
+            if (nextAirspeed != 0)
+            {
+                this.forceAirspeed(nextAirspeed);
+            }
+            this.navMode = NavMode.PATH;
         }
 
         public double tas()

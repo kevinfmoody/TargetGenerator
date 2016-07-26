@@ -29,10 +29,7 @@ namespace TargetGenerator
             try
             {
                 reader.readFile();
-
-                ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedure("ROBUC2");
-                Path path = procedure.path("22L");
-                Console.Write(path.ToString());
+                //Console.Write(path.ToString());
             }
             catch (Exception)
             {
@@ -76,23 +73,30 @@ namespace TargetGenerator
             airspace.airports.Add(kbos.identifier, kbos);
             airspace.streams.Add("QUABN", Data.QUABN3());
 
-            Console.WriteLine("Loading fixes...");
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            
-            stopwatch.Stop();
-            Console.WriteLine("Fixes loaded in " + stopwatch.ElapsedMilliseconds + "ms!");
-
             WeatherSituation weather = new WeatherSituation();
 
             situation = new Situation(props, airspace, weather);
+            situation.loadAircraftFromSituationFile(Data.EasySituationFile);
 
-            Aircraft ac1 = new Aircraft(situation, "SWA394", new Position(42.453460, -69.57343), 250, 5000, 240, "B737", "KJFK", "KBOS");
-            Aircraft ac2 = new Aircraft(situation, "JBU2291", new Position(42.423460, -69.47343), 250, 4000, 360, "A320", "KJFK", "KBOS");
-            Aircraft ac3 = new Aircraft(situation, "AAL2910", new Position(42.463460, -69.37343), 250, 6000, 350, "MD90", "KJFK", "KBOS");
-            Aircraft ac4 = new Aircraft(situation, "JBU43", new Position(42.473460, -69.17343), 250, 6000, 340, "E190", "KJFK", "KBOS");
+            /*ArrivalProcedure procedure = ArrivalProcedureStore.Instance.arrivalProcedure("ROBUC2");
+            Path path = procedure.path("15R");
+            Waypoint final = procedure.finalWaypoint("15R");
 
-            situation.addAircraft(ac1);
+            for (int i = 8; i < 90; i += 10)
+            {
+                Path acPath = path.pathRelativeToWaypoint(final.identifier, i);
+                Aircraft ac = new Aircraft(situation, "AC" + i, new Position(), 250, 5000, 240, "B737", "KJFK", "KBOS");
+                Console.WriteLine("Adding AC" + i);
+                ac.snapToPath(acPath);
+                situation.addAircraft(ac);
+            }*/
+
+            //Aircraft ac1 = new Aircraft(situation, "SWA394", new Position(42.453460, -69.57343), 250, 5000, 240, "B737", "KJFK", "KBOS");
+            //Aircraft ac2 = new Aircraft(situation, "JBU2291", new Position(42.423460, -69.47343), 250, 4000, 360, "A320", "KJFK", "KBOS");
+            //Aircraft ac3 = new Aircraft(situation, "AAL2910", new Position(42.463460, -69.37343), 250, 6000, 350, "MD90", "KJFK", "KBOS");
+            //Aircraft ac4 = new Aircraft(situation, "JBU43", new Position(42.473460, -69.17343), 250, 6000, 340, "E190", "KJFK", "KBOS");
+
+            //situation.addAircraft(ac1);
             //situation.addAircraft(ac2);
             //situation.addAircraft(ac3);
             //situation.addAircraft(ac4);
