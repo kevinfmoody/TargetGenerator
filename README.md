@@ -22,6 +22,19 @@ Status | Command | Sample | Description
 :x: | jro \<waypoint> \<radial> | jro bos 270 | Join the radial outbound the waypoint.
 :x: | jl \<runway> | jl 27 | Join the localizer.
 
+## Altitude Assignment
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | cm \<altitude> | cm 9000 | Climb and maintain the specified altitude.
+:x: | dm \<altitude> | dm 040 | Descend and maintain the specified altitude.
+:x: | caa \<waypoint> \<altitude> | caa nabbo 030 | Cross the waypoint at or above the specified altitude.
+:x: | cab \<waypoint> \<altitude> | cab hfd 6000 | Cross the waypoint at or below the specified altitude.
+:x: | cadm \<waypoint> \<altitude> \<altitude> | cadm pvd 110 070 | Cross the waypoint at the first specified altitude, then descend to the second specified altitude.
+:x: | cacm \<waypoint> \<altitude> \<altitude> | cacm mht 050 090 | Cross the waypoint at the first specified altitude, then climb to the second specified altitude.
+:x: | cam \<waypoint> \<altitude> | cam pvd 110 | Cross the waypoint at and maintain the specified altitude.
+:x: | acm \<waypoint> \<altitude> | acm mht 140 | At the waypoint, climb and maintain the specified altitude.
+:x: | adm \<waypoint> \<altitude> | adm pvd 070 | At the waypoint, descend and maintain the specified altitude.
+
 ## Descend Via
 Status | Command | Sample | Description
 --- | --- | --- | ---
