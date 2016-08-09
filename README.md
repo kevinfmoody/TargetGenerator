@@ -52,6 +52,18 @@ Status | Command | Sample | Description
 :x: | is \<speed> | is 210 | Increase to the specified speed.
 :x: | rns | rns | Resume normal speed.
 
+## Holding
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | h \<waypoint> \<direction> \<radial> \<length> \<direction> | h mht w 310 10 l | Enter and perform a hold.
+:x: | hap \<waypoint> \<direction> | hap pvd s | Hold as published.
+:x: | cv \<waypoint> \<arrival> | cv bos orw7 | Cleared to waypoint via arrival procedure.
+
+## STAR
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | dapd \<altitude> | dapd 240 | Descend at pilot's discretion to altitude.
+
 ## Descend Via
 Status | Command | Sample | Description
 --- | --- | --- | ---
