@@ -19,3 +19,44 @@ Status | Command | Sample | Description
 --- | --- | --- | ---
 :x: | ad \<waypoint> \<altitude> | ad rever 060 | Descend to altitude at specified waypoint.
 :x: | ad \<heading> | ad 060 | Descend to altitude at next waypoint.
+
+## Visual Separation
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | mvs \<callsign> | mvs swa291 | Maintain visual separations from the specified traffic.
+
+## Heading Instructions
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | tdl | tdl \<degrees> | Turn specified number of degrees left.
+:x: | tdr | tdr \<degrees> | Turn specified number of degrees right.
+:x: | fph | fph | Fly present heading.
+
+## Direct
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | pd | pd \<waypoint> | Proceed direct to a waypoint.
+:x: | cd | cd \<waypoint> | Cleared direct to a waypoint.
+:x: | wapd | wapd \<waypoint> | When able, proceed direct to a waypoint.
+
+## Compound Instructions
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | pd | pd \<waypoint> | Proceed direct to a waypoint.
+:x: | cd | cd \<waypoint> | Cleared direct to a waypoint.
+
+## Radials
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | pd | pd \<waypoint> | Proceed direct to a waypoint.
+:x: | cd | cd \<waypoint> | Cleared direct to a waypoint.
+
+## Joining Paths
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | jri | jri \<waypoint> \<radial> | Join the radial inbound the waypoint.
+:x: | jro | jro \<waypoint> \<radial> | Join the radial outbound the waypoint.
+:x: | jl | jl \<runway> | Join the localizer.
+
+
+
