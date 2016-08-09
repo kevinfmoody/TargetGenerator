@@ -35,6 +35,23 @@ Status | Command | Sample | Description
 :x: | acm \<waypoint> \<altitude> | acm mht 140 | At the waypoint, climb and maintain the specified altitude.
 :x: | adm \<waypoint> \<altitude> | adm pvd 070 | At the waypoint, descend and maintain the specified altitude.
 
+## Speed Adjustments
+Status | Command | Sample | Description
+--- | --- | --- | ---
+:x: | mps | mps | Maintain present speed.
+:x: | mpsl | mpsl  | Maintain present speed or less.
+:x: | mpsg | mpsg  | Maintain present speed or greater.
+:x: | m \<speed> | m 210  | Maintain the specified speed.
+:x: | ml \<speed> | ml 170  | Maintain the specified speed or less.
+:x: | mg \<speed> | mg 200  | Maintain the specified speed or greater.
+:x: | mmfs | mmfs  | Maintain maximum forward speed.
+:x: | msps | msps  | Maintain slowest practical speed.
+:x: | rs \<knots> | rs 10 | Reduce speed by the specified number of knots.
+:x: | is \<knots> | is 20 | Increase speed by the specified number of knots.
+:x: | rs \<speed> | rs 170 | Reduce to the specified speed.
+:x: | is \<speed> | is 210 | Increase to the specified speed.
+:x: | rns | rns | Resume normal speed.
+
 ## Descend Via
 Status | Command | Sample | Description
 --- | --- | --- | ---
