@@ -11,8 +11,8 @@ Status | Command | Sample | Description
 :x: | tlh \<heading> | tlh 200 | Turn left to the specified heading.
 :x: | trh \<heading> | trh 140 | Turn right to the specified heading.
 :x: | fh \<heading> | fh 180 | Fly the specified heading.
-:x: | tdl \<degrees> | tdl \<degrees> | Turn specified number of degrees left.
-:x: | tdr \<degrees> | tdr \<degrees> | Turn specified number of degrees right.
+:x: | tdl \<degrees> | tdl 20 | Turn specified number of degrees left.
+:x: | tdr \<degrees> | tdr 10 | Turn specified number of degrees right.
 :x: | fph | fph | Fly present heading.
 :x: | dh \<waypoint> \<heading> | dh rever 180 | Depart waypoint with heading.
 :x: | pd \<waypoint> | pd jfk | Proceed direct to a waypoint.
