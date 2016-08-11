@@ -1,5 +1,18 @@
 # TargetGenerator
 
+## Shortcuts
+Status | Shortcut | Full Command
+--- | --- | ---
+:x: | v \<runway> | cva \<runway>
+:x: | a \<altitude> | dm/cm \<altitude>
+:x: | c \<altitude> | cm \<altitude>
+:x: | d \<altitude> | dm \<altitude>
+:x: | h \<heading> | fh \<heading>
+:x: | i \<runway> | cils \<runway>
+:x: | l \<heading> | tlh \<heading>
+:x: | r \<heading> | trh\<heading>
+:x: | s \<speed> | m \<speed>
+
 ## Visual Separation
 Status | Command | Sample | Description
 --- | --- | --- | ---
