@@ -59,6 +59,7 @@
     <Compile Include="ArrivalFileReader.cs" />
     <Compile Include="ArrivalProcedure.cs" />
     <Compile Include="ArrivalProcedureStore.cs" />
+    <Compile Include="Commands.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Data.cs" />

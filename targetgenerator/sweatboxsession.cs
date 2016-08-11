@@ -224,7 +224,17 @@ namespace TargetGenerator
         private void SweatboxSession_RadioMessageReceived(object sender, DataReceivedEventArgs<Metacraft.Vatsim.Network.PDU.PDURadioMessage> e)
         {
             PDURadioMessage radio = e.PDU;
-            string[] parts = radio.Message.ToUpper().Split(new char[] { ' ' });
+            string[] tokens = radio.Message.ToUpper().Split(new char[] { ' ' });
+            if (tokens.Length == 0 || tokens[0].Length == 0)
+            {
+                return;
+            }
+
+            Commands commands = new Commands(this, radio);
+            commands.run(tokens);
+            return;
+
+            string[] parts = tokens;
             string firstPart = parts[0];
             if (firstPart.Length == 0)
             {
