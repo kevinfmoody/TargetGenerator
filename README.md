@@ -70,14 +70,6 @@ Status | Command | Sample | Description
 :x: | ecab \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or below the specified altitude.
 :x: | ecaa \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or above the specified altitude.
 
-## Descend Via
-Status | Command | Sample | Description
---- | --- | --- | ---
-:x: | dv \<star> \<rwy> | dv robuc2 22l | Descend via with STAR and runway assignment.
-:x: | dv \<star> | dv robuc2 | Descend via with STAR assignment.
-:x: | dv \<rwy> | dv 22l | Descend via with runway assignment.
-:x: | dv | dv | Descend via previously assigned STAR.
-
 ## Approach Clearance
 Status | Command | Sample | Description
 --- | --- | --- | ---
