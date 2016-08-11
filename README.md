@@ -4,11 +4,11 @@
 Status | Shortcut | Full Command | Short Description
 --- | --- | --- | ---
 :x: | d \<waypoint> | cd \<waypoint> | Cleared direct.
-:x: | h \<heading> | fh \<heading> | Fly heading.
-:x: | l \<heading> | tlh \<heading> | Turn left heading.
-:x: | r \<heading> | trh\<heading> | Turn right heading.
-:x: | a \<altitude> | dm/cm \<altitude> | Maintain altitude.
-:x: | s \<speed> | m \<speed> | Maintain speed.
+:white_check_mark: | h \<heading> | fh \<heading> | Fly heading.
+:white_check_mark: | l \<heading> | tlh \<heading> | Turn left heading.
+:white_check_mark: | r \<heading> | trh\<heading> | Turn right heading.
+:white_check_mark: | a \<altitude> | dm/cm \<altitude> | Maintain altitude.
+:white_check_mark: | s \<speed> | m \<speed> | Maintain speed.
 :x: | j \<runway> | jl \<runway> | Join localizer.
 :x: | i \<runway> | cils \<runway> | Cleared ILS.
 :x: | v \<runway> | cva \<runway> | Cleared visual approach.
@@ -21,9 +21,9 @@ Status | Command | Sample | Description
 ## Vectoring
 Status | Command | Sample | Description
 --- | --- | --- | ---
-:x: | tlh \<heading> | tlh 200 | Turn left to the specified heading.
-:x: | trh \<heading> | trh 140 | Turn right to the specified heading.
-:x: | fh \<heading> | fh 180 | Fly the specified heading.
+:white_check_mark: | tlh \<heading> | tlh 200 | Turn left to the specified heading.
+:white_check_mark: | trh \<heading> | trh 140 | Turn right to the specified heading.
+:white_check_mark: | fh \<heading> | fh 180 | Fly the specified heading.
 :x: | tdl \<degrees> | tdl 20 | Turn specified number of degrees left.
 :x: | tdr \<degrees> | tdr 10 | Turn specified number of degrees right.
 :x: | fph | fph | Fly present heading.
@@ -38,8 +38,8 @@ Status | Command | Sample | Description
 ## Altitude Assignment
 Status | Command | Sample | Description
 --- | --- | --- | ---
-:x: | cm \<altitude> | cm 9000 | Climb and maintain the specified altitude.
-:x: | dm \<altitude> | dm 040 | Descend and maintain the specified altitude.
+:white_check_mark: | cm \<altitude> | cm 9000 | Climb and maintain the specified altitude.
+:white_check_mark: | dm \<altitude> | dm 040 | Descend and maintain the specified altitude.
 :x: | cam \<waypoint> \<altitude> | cam pvd 110 | Cross the waypoint at and maintain the specified altitude.
 :x: | caa \<waypoint> \<altitude> | caa nabbo 030 | Cross the waypoint at or above the specified altitude.
 :x: | cab \<waypoint> \<altitude> | cab hfd 6000 | Cross the waypoint at or below the specified altitude.
@@ -55,7 +55,7 @@ Status | Command | Sample | Description
 :x: | mps | mps | Maintain present speed.
 :x: | mpsl | mpsl  | Maintain present speed or less.
 :x: | mpsg | mpsg  | Maintain present speed or greater.
-:x: | m \<speed> | m 210  | Maintain the specified speed.
+:white_check_mark: | m \<speed> | m 210  | Maintain the specified speed.
 :x: | ml \<speed> | ml 170  | Maintain the specified speed or less.
 :x: | mg \<speed> | mg 200  | Maintain the specified speed or greater.
 :x: | mmfs | mmfs  | Maintain maximum forward speed.
