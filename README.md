@@ -3,15 +3,15 @@
 ## Shortcuts
 Status | Shortcut | Full Command
 --- | --- | ---
-:x: | v \<runway> | cva \<runway>
-:x: | a \<altitude> | dm/cm \<altitude>
-:x: | c \<altitude> | cm \<altitude>
-:x: | d \<altitude> | dm \<altitude>
+:x: | d \<waypoint> | cd \<waypoint>
 :x: | h \<heading> | fh \<heading>
-:x: | i \<runway> | cils \<runway>
 :x: | l \<heading> | tlh \<heading>
 :x: | r \<heading> | trh\<heading>
+:x: | a \<altitude> | dm/cm \<altitude>
 :x: | s \<speed> | m \<speed>
+:x: | j \<runway> | jl \<runway>
+:x: | i \<runway> | cils \<runway>
+:x: | v \<runway> | cva \<runway>
 
 ## Visual Separation
 Status | Command | Sample | Description
