@@ -32,6 +32,7 @@ Status | Command | Sample | Description
 :x: | cab \<waypoint> \<altitude> | cab hfd 6000 | Cross the waypoint at or below the specified altitude.
 :x: | catdm \<waypoint> \<altitude> \<altitude> | catdm pvd 110 070 | Cross the waypoint at the first specified altitude, then descend to the second specified altitude.
 :x: | catcm \<waypoint> \<altitude> \<altitude> | catcm mht 050 090 | Cross the waypoint at the first specified altitude, then climb to the second specified altitude.
+:x: | am \<waypoint> \<altitude> | am pvd 110 | After the waypoint, maintain the specified altitude.
 :x: | acm \<waypoint> \<altitude> | acm mht 140 | At the waypoint, climb and maintain the specified altitude.
 :x: | adm \<waypoint> \<altitude> | adm pvd 070 | At the waypoint, descend and maintain the specified altitude.
 
@@ -63,6 +64,11 @@ Status | Command | Sample | Description
 Status | Command | Sample | Description
 --- | --- | --- | ---
 :x: | dapd \<altitude> | dapd 240 | Descend at pilot's discretion to altitude.
+:x: | dv \<arrival> | dv robuc2 | Descend via an arrival.
+:x: | dvr \<arrival> | dv robuc2 22l | Descend via an arrival with the specified runway transition.
+:x: | eca \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at the specified altitude.
+:x: | ecab \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or below the specified altitude.
+:x: | ecaa \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or above the specified altitude.
 
 ## Descend Via
 Status | Command | Sample | Description
@@ -72,9 +78,9 @@ Status | Command | Sample | Description
 :x: | dv \<rwy> | dv 22l | Descend via with runway assignment.
 :x: | dv | dv | Descend via previously assigned STAR.
 
-## Descend at Waypoint
+## Approach Clearance
 Status | Command | Sample | Description
 --- | --- | --- | ---
-:x: | ad \<waypoint> \<altitude> | ad rever 060 | Descend to altitude at specified waypoint.
-:x: | ad \<heading> | ad 060 | Descend to altitude at next waypoint.
-
+:x: | cils \<runway> | cils 27 | Cleared for the ILS approach.
+:x: | cva \<runway> | cva 4l | Cleared for the visual approach.
+:x: | cvaf \<aircraft> | cva swa393 | Cleared for the visual approach following the specified traffic.
