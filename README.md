@@ -1,17 +1,17 @@
 # TargetGenerator
 
 ## Shortcuts
-Status | Shortcut | Full Command
---- | --- | ---
-:x: | d \<waypoint> | cd \<waypoint>
-:x: | h \<heading> | fh \<heading>
-:x: | l \<heading> | tlh \<heading>
-:x: | r \<heading> | trh\<heading>
-:x: | a \<altitude> | dm/cm \<altitude>
-:x: | s \<speed> | m \<speed>
-:x: | j \<runway> | jl \<runway>
-:x: | i \<runway> | cils \<runway>
-:x: | v \<runway> | cva \<runway>
+Status | Shortcut | Full Command | Short Description
+--- | --- | --- | ---
+:x: | d \<waypoint> | cd \<waypoint> | Cleared direct.
+:x: | h \<heading> | fh \<heading> | Fly heading.
+:x: | l \<heading> | tlh \<heading> | Turn left heading.
+:x: | r \<heading> | trh\<heading> | Turn right heading.
+:x: | a \<altitude> | dm/cm \<altitude> | Maintain altitude.
+:x: | s \<speed> | m \<speed> | Maintain speed.
+:x: | j \<runway> | jl \<runway> | Join localizer.
+:x: | i \<runway> | cils \<runway> | Cleared ILS.
+:x: | v \<runway> | cva \<runway> | Cleared visual approach.
 
 ## Visual Separation
 Status | Command | Sample | Description
