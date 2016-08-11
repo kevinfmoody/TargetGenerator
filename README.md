@@ -78,7 +78,7 @@ Status | Command | Sample | Description
 --- | --- | --- | ---
 :x: | dapd \<altitude> | dapd 240 | Descend at pilot's discretion to altitude.
 :x: | dv \<arrival> | dv robuc2 | Descend via an arrival.
-:x: | dvr \<arrival> | dv robuc2 22l | Descend via an arrival with the specified runway transition.
+:x: | dvr \<arrival> \<runway> | dv robuc2 22l | Descend via an arrival with the specified runway transition.
 :x: | eca \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at the specified altitude.
 :x: | ecab \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or below the specified altitude.
 :x: | ecaa \<arrival> \<waypoint> \<altitude> | dv robuc2 pvd 090 | Except cross the waypoint at or above the specified altitude.
