@@ -9,7 +9,7 @@ Status | Shortcut | Full Command | Short Description
 :white_check_mark: | r \<heading> | trh\<heading> | Turn right heading.
 :white_check_mark: | a \<altitude> | dm/cm \<altitude> | Maintain altitude.
 :white_check_mark: | s \<speed> | m \<speed> | Maintain speed.
-:x: | j \<runway> | jl \<runway> | Join localizer.
+:white_check_mark: | j \<runway> | jl \<runway> | Join localizer.
 :x: | i \<runway> | cils \<runway> | Cleared ILS.
 :x: | v \<runway> | cva \<runway> | Cleared visual approach.
 
@@ -24,16 +24,16 @@ Status | Command | Sample | Description
 :white_check_mark: | tlh \<heading> | tlh 200 | Turn left to the specified heading.
 :white_check_mark: | trh \<heading> | trh 140 | Turn right to the specified heading.
 :white_check_mark: | fh \<heading> | fh 180 | Fly the specified heading.
-:x: | tdl \<degrees> | tdl 20 | Turn specified number of degrees left.
-:x: | tdr \<degrees> | tdr 10 | Turn specified number of degrees right.
-:x: | fph | fph | Fly present heading.
+:white_check_mark: | tdl \<degrees> | tdl 20 | Turn specified number of degrees left.
+:white_check_mark: | tdr \<degrees> | tdr 10 | Turn specified number of degrees right.
+:white_check_mark: | fph | fph | Fly present heading.
 :x: | dh \<waypoint> \<heading> | dh rever 180 | Depart waypoint with heading.
 :x: | pd \<waypoint> | pd jfk | Proceed direct to a waypoint.
 :x: | cd \<waypoint> | cd bos | Cleared direct to a waypoint.
 :x: | wapd \<waypoint> | wapd mht | When able, proceed direct to a waypoint.
 :x: | jri \<waypoint> \<radial> | jri bos 180 | Join the radial inbound the waypoint.
 :x: | jro \<waypoint> \<radial> | jro bos 270 | Join the radial outbound the waypoint.
-:x: | jl \<runway> | jl 27 | Join the localizer.
+:white_check_mark: | jl \<runway> | jl 27 | Join the localizer.
 
 ## Altitude Assignment
 Status | Command | Sample | Description
@@ -52,7 +52,7 @@ Status | Command | Sample | Description
 ## Speed Adjustments
 Status | Command | Sample | Description
 --- | --- | --- | ---
-:x: | mps | mps | Maintain present speed.
+:white_check_mark: | mps | mps | Maintain present speed.
 :x: | mpsl | mpsl  | Maintain present speed or less.
 :x: | mpsg | mpsg  | Maintain present speed or greater.
 :white_check_mark: | m \<speed> | m 210  | Maintain the specified speed.
@@ -60,11 +60,11 @@ Status | Command | Sample | Description
 :x: | mg \<speed> | mg 200  | Maintain the specified speed or greater.
 :x: | mmfs | mmfs  | Maintain maximum forward speed.
 :x: | msps | msps  | Maintain slowest practical speed.
-:x: | rs \<knots> | rs 10 | Reduce speed by the specified number of knots.
-:x: | is \<knots> | is 20 | Increase speed by the specified number of knots.
-:x: | rs \<speed> | rs 170 | Reduce to the specified speed.
-:x: | is \<speed> | is 210 | Increase to the specified speed.
-:x: | rns | rns | Resume normal speed.
+:white_check_mark: | rs \<knots> | rs 10 | Reduce speed by the specified number of knots.
+:white_check_mark: | is \<knots> | is 20 | Increase speed by the specified number of knots.
+:white_check_mark: | rs \<speed> | rs 170 | Reduce to the specified speed.
+:white_check_mark: | is \<speed> | is 210 | Increase to the specified speed.
+:white_check_mark: | rns | rns | Resume normal speed.
 
 ## Holding
 Status | Command | Sample | Description
